@@ -1,4 +1,5 @@
 from torchvision import datasets, transforms
+from utils import *
 
 def load_test_dataset(config, batch_size):
     transform = transforms.Compose( [transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])

@@ -1,3 +1,7 @@
+from utils import *
+import torch
+import torch.nn as nn
+
 def pgd_attack(model, criterion, images, labels, eps=0.3, alpha=0.00784313725490196, iters=10) :
     images = images.to(DEVICE)
     labels = labels.to(DEVICE)

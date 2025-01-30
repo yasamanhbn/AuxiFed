@@ -1,3 +1,8 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import numpy as np
+from utils import *
 def trainACGAN(loader_train, generator, discriminator, device, epochs, batch_size, n_classes, id):
   adversarial_loss = torch.nn.BCELoss()
   auxiliary_loss = torch.nn.CrossEntropyLoss()

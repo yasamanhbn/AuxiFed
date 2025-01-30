@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+from Client import *
 
 
 def get_test_dataLoader(test_dataset, batch_size):
@@ -14,12 +15,12 @@ def get_test_dataLoader(test_dataset, batch_size):
 
 def get_data_dir(dataset, type='Mnist'):
     if 'EMnist' in dataset or type=='EMnist':
-        path_prefix=os.path.join('/', dataset)
+        path_prefix=os.path.join('', dataset)
         train_data_dir=os.path.join(path_prefix, 'train')
         test_data_dir=os.path.join(path_prefix, 'test')
 
     elif type == 'Mnist':
-        path_prefix=os.path.join('/', dataset)
+        path_prefix=os.path.join('', dataset)
         train_data_dir=os.path.join(path_prefix, 'train')
         test_data_dir=os.path.join(path_prefix, 'test')
 
@@ -108,11 +109,11 @@ def convert_data(X, y, dataset=''):
             y=torch.Tensor(y).type(torch.int64)
     return X, y
 
-def get_dataLoader(config, total_users):
+def get_dataLoader(config):
     data = read_data(config.datasetPath, dataType=config.DATASETTYPE)
     users = []
 
-    for i in range(total_users):
+    for i in range(config.NUM_CLIENTS):
         id, train_data, test_data  = read_user_data(i, data, config.datasetPath)
         user = USER(id, train_data, test_data)
         user.clean_data()

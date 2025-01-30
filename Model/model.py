@@ -1,9 +1,7 @@
 import torch.nn as nn
 import torch.nn.functional as F
+from utils import *
 
-#Final image size before FC layer
-FLATTEN_SIZE = 16*7*7
-# FLATTEN_SIZE = 64*7*7
 class CNN(nn.Module):
     def __init__(self):
       super(CNN, self).__init__()

@@ -1,5 +1,7 @@
 import copy
 import torch
+from utils import *
+
 def FedAvg(params):
     """
     Average the paramters from each client to update the global model

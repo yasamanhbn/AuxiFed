@@ -1,3 +1,7 @@
+from utils import *
+import torch
+import torch.nn as nn
+
 def fgsm_attack(model, loss, images, labels, eps=0.3):
 
     images = images.to(DEVICE)
