@@ -4,6 +4,7 @@ from tqdm import tqdm
 from Model import *
 import torch.nn as nn
 from utils import *
+from tqdm import tqdm
 
 class Client():
   def __init__(self, batch_size, device, train_loader, test_loader, class_dict, gan_epoch, class_num, id):

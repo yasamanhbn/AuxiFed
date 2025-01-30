@@ -1,5 +1,6 @@
 import torch
 from utils import *
+from tqdm import tqdm
 
 def test(model, dataloader, optimizer):
     """

@@ -2,6 +2,7 @@ from data import *
 from Client import *
 from Model import *
 from utils import *
+from tqdm import tqdm
 
 def train(config):
     test_data = load_test_dataset(config, batch_size=config.BATCH_SIZE)

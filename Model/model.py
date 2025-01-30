@@ -5,7 +5,6 @@ from utils import *
 class CNN(nn.Module):
     def __init__(self):
       super(CNN, self).__init__()
-      set_seeds(0)
       self.conv1 = nn.Conv2d(1, 8, kernel_size=3, padding=1, stride=1)
       self.bn1 =  nn.BatchNorm2d(8)
       self.conv2 = nn.Conv2d(8, 16, kernel_size=3, padding=1, stride=1)
