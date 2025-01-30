@@ -1,4 +1,6 @@
-def train(mode):
+
+
+def train():
     test_data = load_test_dataset(batch_size=config.BATCH_SIZE)
     test_data  = get_test_dataLoader(test_data, config.BATCH_SIZE)
     users = get_dataLoader(config.NUM_CLIENTS)
@@ -14,7 +16,7 @@ def train(mode):
       client_dataloader = torch.utils.data.DataLoader(users[c].train_data, batch_size=config.BATCH_SIZE, shuffle=True)
       client_test_dataloader = torch.utils.data.DataLoader(users[c].test_data, batch_size=config.BATCH_SIZE, shuffle=True)
       clients.append(Client(batch_size=config.BATCH_SIZE, device=DEVICE, train_loader=client_dataloader, test_loader=client_test_dataloader,
-                            class_dict=users[c].class_dict, gan_epoch=config.gan_epoch, ganType=ganT, class_num=config.CLASS_NUM, id=c))
+                            class_dict=users[c].class_dict, gan_epoch=config.gan_epoch, class_num=config.CLASS_NUM, id=c))
 
 
       print("-"*100)
@@ -47,7 +49,7 @@ def train(mode):
             local_acc.append(copy.deepcopy(c_accuracy))
 
             client_losses[idx].append(copy.deepcopy(c_loss))
-            client_acces[idx].append(copy.deepcopy(c_accuracy)
+            client_acces[idx].append(copy.deepcopy(c_accuracy))
 
         #Federated Average for the paramters from each client
         global_params = FedAvg(local_params)

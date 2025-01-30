@@ -1,14 +1,25 @@
+import random
+import numpy as np
+import os
+import torch
+import torch.nn as nn
+import argparse
+from torchvision.datasets import MNIST
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader
+from utils import *
+
 random.seed(10)
 np.random.seed(10)
 
 def rearrange_data_by_class(data, targets, n_class):
     new_data = []
-    for i in trange(n_class):
+    for i in range(n_class):
         idx = targets == i
         new_data.append(data[idx])
     return new_data
 
-def get_dataset(mode='train'):
+def get_dataset(config, mode='train'):
     transform = transforms.Compose(
        [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
     if config.DATASETTYPE == 'Mnist':
@@ -95,7 +106,7 @@ def divide_test_data(NUM_USERS, SRC_CLASSES, test_data, Labels, unknown_test):
     test_X = [[] for _ in range(NUM_USERS)]
     test_y = [[] for _ in range(NUM_USERS)]
     idx = {l: 0 for l in SRC_CLASSES}
-    for user in trange(NUM_USERS):
+    for user in range(NUM_USERS):
         if unknown_test: # use all available labels
             user_sampled_labels = SRC_CLASSES
         else:
@@ -109,7 +120,7 @@ def divide_test_data(NUM_USERS, SRC_CLASSES, test_data, Labels, unknown_test):
             idx[l] += num_samples
     return test_X, test_y
 
-def main():
+def generate_data(config):
     parser = argparse.ArgumentParser()
     parser.add_argument("--format", "-f", type=str, default="pt", help="Format of saving: pt (torch.save), json", choices=["pt", "json"])
     parser.add_argument("--n_class", type=int, default=config.CLASS_NUM, help="number of classification labels")
@@ -181,14 +192,11 @@ def main():
 
 
     print(f"Reading source dataset.")
-    train_data, n_train_sample, SRC_N_CLASS = get_dataset(mode='train')
-    test_data, n_test_sample, SRC_N_CLASS = get_dataset(mode='test')
+    train_data, n_train_sample, SRC_N_CLASS = get_dataset(config, mode='train')
+    test_data, n_test_sample, SRC_N_CLASS = get_dataset(config, mode='test')
     SRC_CLASSES=[l for l in range(SRC_N_CLASS)]
     random.shuffle(SRC_CLASSES)
     print("{} labels in total.".format(len(SRC_CLASSES)))
     Labels, idx_batch, samples_per_user = process_user_data('train', train_data, n_train_sample, SRC_CLASSES)
     process_user_data('test', test_data, n_test_sample, SRC_CLASSES, Labels=Labels, unknown_test=args.unknown_test)
     print("Finish Generating User samples")
-
-
-main()

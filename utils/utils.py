@@ -9,9 +9,9 @@ def set_seeds(seed):
     torch.backends.cudnn.benchmark = True
 
 
-def plot_loss(disc_loss, gen_loss, id, ganType):
+def plot_loss(disc_loss, gen_loss, id):
   _, axes = plt.subplots(1, 1, figsize=(12, 3))
-  plt.suptitle("Loss plot for Generator and Discriminator of " + ganType +" for client"+ str(id + 1), size=14)
+  plt.suptitle("Loss plot for Generator and Discriminator for client"+ str(id + 1), size=14)
   axes.plot(list(range(1, len(disc_loss) + 1)), disc_loss, 'b',label='discriminator loss')
   axes.plot(list(range(1, len(gen_loss) + 1)), gen_loss, 'r', label='generator loss')
   axes.set_ylabel('Loss Average', size=12, labelpad=10)

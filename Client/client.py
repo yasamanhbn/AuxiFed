@@ -23,7 +23,7 @@ class Client():
     self.discriminator.apply(weights_init_normal)
     self.generator = trainACGAN(train_loader, self.generator, self.discriminator, device, gan_epoch, batch_size, class_num, self.id)
 
-  def train_client(self, local_model, iters, lr, mode = 'train'):
+  def train_client(self, local_model, iters, lr):
     torch.autograd.set_detect_anomaly(True)
     #optimzer for training the local models
     local_model.to(self.device)
@@ -47,7 +47,7 @@ class Client():
             labels = Variable(LongTensor(target))
 
 
-            if data.shape[0] == self.BATCH_SIZE and mode == 'train':
+            if data.shape[0] == self.BATCH_SIZE:
                   data1 = self.generator(z, labels[:int(self.BATCH_SIZE / config.replace_probs)])
                   data[:int(self.BATCH_SIZE / config.replace_probs)] = data1
 
@@ -65,7 +65,7 @@ class Client():
             optimizer.zero_grad()
             #Get output prediction from the Client model
 
-            output = local_model(data, original_data, labels, self.class_lens, type=mode)
+            output = local_model(data, original_data, labels, self.class_lens)
             #Computer loss
             c_loss = criterion(output, target)
             batch_loss = batch_loss + c_loss.item()
@@ -101,7 +101,7 @@ class Client():
     with torch.no_grad():
       for batch_idx, (data, target) in enumerate(self.test_loader):
         data, target = data.to(DEVICE), target.to(DEVICE)
-        output = local_model(data, type="valid").to(DEVICE)
+        output = local_model(data).to(DEVICE)
 
         #Computer loss
         c_loss = criterion(output, target).to(DEVICE)

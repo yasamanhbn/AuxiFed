@@ -14,12 +14,12 @@ def get_test_dataLoader(test_dataset, batch_size):
 
 def get_data_dir(dataset, type='Mnist'):
     if 'EMnist' in dataset or type=='EMnist':
-        path_prefix=os.path.join('/content', dataset)
+        path_prefix=os.path.join('/', dataset)
         train_data_dir=os.path.join(path_prefix, 'train')
         test_data_dir=os.path.join(path_prefix, 'test')
 
     elif type == 'Mnist':
-        path_prefix=os.path.join('/content', dataset)
+        path_prefix=os.path.join('/', dataset)
         train_data_dir=os.path.join(path_prefix, 'train')
         test_data_dir=os.path.join(path_prefix, 'test')
 
