@@ -1,0 +1,1 @@
+config = Config(DATASETTYPE='EMnist', alpha=1) #when change alpha or datset, you should run dataset and dataloader
