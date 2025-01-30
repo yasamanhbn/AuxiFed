@@ -1,8 +1,9 @@
+from data import *
+from Client import *
 
-
-def train():
-    test_data = load_test_dataset(batch_size=config.BATCH_SIZE)
-    test_data  = get_test_dataLoader(test_data, config.BATCH_SIZE)
+def train(config):
+    test_data = load_test_dataset(config, batch_size=config.BATCH_SIZE)
+    test_data  = get_test_dataLoader(config, test_data, config.BATCH_SIZE)
     users = get_dataLoader(config.NUM_CLIENTS)
 
     clients = []
