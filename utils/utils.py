@@ -127,3 +127,7 @@ def save_GAN_report(loss_D , loss_G, acc , file_path):
         for row in rows:
             writer.writerow(row)
     return
+
+def calculate_acc(output, target):
+  _, predictions = torch.max(output, dim=1)
+  return torch.tensor(torch.sum(predictions == target).item() / len(predictions))
