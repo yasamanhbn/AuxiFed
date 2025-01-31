@@ -1,3 +1,3 @@
 from .discriminator import *
 from .generator import *
-from .train import *
+from .gan_train import *

@@ -19,7 +19,7 @@ def test(model, dataloader, optimizer):
     all_preds = []
 
     with torch.no_grad():
-        loop_val = tqdm(enumerate(dataloader, 1), total=len(dataloader), desc="Validation", position=0, leave=True)
+        loop_val = tqdm(enumerate(dataloader, 1), total=len(dataloader), desc="Test", position=0, leave=True)
         time1 = time.time()
         for batch_idx, (data, target) in loop_val:
               data, target = data.to(DEVICE), target.to(DEVICE)

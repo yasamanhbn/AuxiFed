@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from utils import *
 class ACGenerator(nn.Module):
-  def __init__(self):
+  def __init__(self, config):
     super(ACGenerator,self).__init__()
 
     self.label_emb = nn.Embedding(config.CLASS_NUM, config.latent_dim)

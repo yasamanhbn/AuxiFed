@@ -5,6 +5,8 @@ import random
 import json
 import math
 import random
+import torch
+import torch.nn as nn
 
 def set_seeds(seed):
     random.seed(seed)

@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from utils import *
 class ACDiscriminator(nn.Module):
-  def __init__(self):
+  def __init__(self, config):
 
     super(ACDiscriminator,self).__init__()
     def discriminator_block(in_filters, out_filters, bn=True):

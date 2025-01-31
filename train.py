@@ -11,7 +11,7 @@ def train(config):
 
     clients = []
 
-    global_model = CNN()
+    global_model = CNN(config)
     global_params = global_model.state_dict()
 
     for c in range(config.NUM_CLIENTS):
@@ -19,7 +19,7 @@ def train(config):
       
       client_dataloader = torch.utils.data.DataLoader(users[c].train_data, batch_size=config.BATCH_SIZE, shuffle=True)
       client_test_dataloader = torch.utils.data.DataLoader(users[c].test_data, batch_size=config.BATCH_SIZE, shuffle=True)
-      clients.append(Client(batch_size=config.BATCH_SIZE, device=DEVICE, train_loader=client_dataloader, test_loader=client_test_dataloader,
+      clients.append(Client(config, batch_size=config.BATCH_SIZE, device=DEVICE, train_loader=client_dataloader, test_loader=client_test_dataloader,
                             class_dict=users[c].class_dict, gan_epoch=config.gan_epoch, class_num=config.CLASS_NUM, id=c))
 
 
@@ -36,7 +36,7 @@ def train(config):
     client_acces = [list() for i in range(config.NUM_CLIENTS)]
 
     #Train the model for given number of epochs
-    for epoch in range(1, config.NUM_EPOCHS+1):
+    for epoch in range(1, config.NUM_EPOCHS + 1):
         print("-"*40 + "Epoch " + str(epoch) + "-"*40)
         local_params, local_losses, local_acc = [], [], []
         val_loss = 0
@@ -45,7 +45,7 @@ def train(config):
         for idx, clnt in enumerate(clients):
             print("Clinet " + str(idx + 1) + ":")
             #Perform training on client side and get the parameters
-            local_mdl, param, optimizer, c_loss, c_accuracy = clnt.train_client(copy.deepcopy(global_model), config.LOCAL_ITERS, lr=config.lr, mode=mode)
+            local_mdl, param, optimizer, c_loss, c_accuracy = clnt.train_client(copy.deepcopy(global_model), config.LOCAL_ITERS, lr=config.lr)
             loss_, acc_ = clnt.test_client(copy.deepcopy(local_mdl))
 
             local_params.append(copy.deepcopy(param))

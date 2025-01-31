@@ -3,7 +3,7 @@ import torch.nn.functional as F
 from utils import *
 
 class CNN(nn.Module):
-    def __init__(self):
+    def __init__(self, config):
       super(CNN, self).__init__()
       self.conv1 = nn.Conv2d(1, 8, kernel_size=3, padding=1, stride=1)
       self.bn1 =  nn.BatchNorm2d(8)
