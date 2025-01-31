@@ -62,16 +62,16 @@ def train(config):
         all_train_loss.append(sum(local_losses)/len(local_losses))
         all_train_acc.append(sum(local_acc)/len(local_acc))
 
-        print("Test phase for each client on final model")
-        for idx, clnt in enumerate(clients):
-            loss_, acc_ = clnt.test_client(copy.deepcopy(global_model))
-            val_acc += (config.test_len[idx] * acc_)
-            val_loss += (config.test_len[idx] * loss_)
-        print("-"*100)
-        print("Average Accuracy: " + str(val_acc * 100 / sum(config.test_len)))
-        print("Average Loss: " + str(val_loss / sum(config.test_len)))
-        print("-"*100)
-        print("Final Test in global moedel with test dataset")
+        # print("Test phase for each client on final model")
+        # for idx, clnt in enumerate(clients):
+        #     loss_, acc_ = clnt.test_client(copy.deepcopy(global_model))
+        #     val_acc += (config.test_len[idx] * acc_)
+        #     val_loss += (config.test_len[idx] * loss_)
+        # print("-"*100)
+        # print("Average Accuracy: " + str(val_acc * 100 / sum(config.test_len)))
+        # print("Average Loss: " + str(val_loss / sum(config.test_len)))
+        # print("-"*100)
+        # print("Final Test in global moedel with test dataset")
 
         test_loss, accuracy, all_preds = test(copy.deepcopy(global_model), test_data, optimizer)
         all_val_loss.append(test_loss)
@@ -82,7 +82,7 @@ def train(config):
           file_name=f"cgan-ckpt_epoch{epoch}.ckpt",
           model=global_model,
         )
-    test_loss, accuracy, all_preds = test(copy.deepcopy(global_model), test_data, optimizer)
+    # test_loss, accuracy, all_preds = test(copy.deepcopy(global_model), test_data, optimizer)
 
     plot_clients_stats(client_losses, client_acces)
     save_model_report(all_train_loss, all_train_acc, all_val_loss, all_val_acc, config.Results)

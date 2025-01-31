@@ -20,7 +20,6 @@ def test(model, dataloader, optimizer):
 
     with torch.no_grad():
         loop_val = tqdm(enumerate(dataloader, 1), total=len(dataloader), desc="Test", position=0, leave=True)
-        time1 = time.time()
         for batch_idx, (data, target) in loop_val:
               data, target = data.to(DEVICE), target.to(DEVICE)
 
@@ -30,7 +29,7 @@ def test(model, dataloader, optimizer):
               test_loss += loss.item()
               correct += calculate_acc(output, target).item()
 
-              all_preds = all_preds + (output.detach().numpy().tolist())
+              all_preds = all_preds + (output.detach().cpu().numpy().tolist())
 
               loop_val.set_description(f"Test")
               loop_val.set_postfix(

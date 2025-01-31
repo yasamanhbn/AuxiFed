@@ -11,7 +11,7 @@ class Config():
         self.lr = 0.001
         self.NUM_CLIENTS = 8
         self.LOCAL_ITERS = local_iter
-        self.NUM_EPOCHS = gan_epochs
+        self.NUM_EPOCHS = rounds
         self.gan_epoch = gan_epochs  
         self.BATCH_SIZE = 64
         self.adverseial_training = adverseial_training  #Adverserial Example Training
