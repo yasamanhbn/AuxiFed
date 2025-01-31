@@ -1,6 +1,6 @@
 class Config():
 
-    def __init__(self, DATASETTYPE, alpha, local_iter=4, rounds=4, gan_epochs=50, adverseial_training=False, adverseial_training_probs=2, replace_probs=16):
+    def __init__(self, DATASETTYPE, alpha, local_iter=4, rounds=4, gan_epochs=50, adverseial_training=False, attack='fgsm', adverseial_training_probs=2, replace_probs=16):
         self.latent_dim = 100
         self.img_size=28
         self.channels=1
@@ -15,6 +15,7 @@ class Config():
         self.gan_epoch = gan_epochs  
         self.BATCH_SIZE = 64
         self.adverseial_training = adverseial_training  #Adverserial Example Training
+        self.attack = attack
 
         self.adverseial_training_probs = adverseial_training_probs
         self.replace_probs = replace_probs
@@ -31,7 +32,7 @@ class Config():
         elif self.DATASETTYPE =='Mnist' and self.ALPHA==1:
             self.train_len = [8217, 7619, 6034, 9426, 7497, 3937, 6952, 10318] #MNISt-alpha1
             self.test_len = [878, 878, 1245, 1119, 1245, 1119, 1245, 1245]
-            self.datasetPath = "Mnist-u8c10-alpha1-ratio1"
+            self.datasetPath = "Mnist-u8c10-alpha1.0-ratio1"
             self.CLASS_NUM = 10
 
             self.Results = "./mnist-alpha1-pgd-ACganReport.csv"
@@ -49,7 +50,7 @@ class Config():
         elif self.DATASETTYPE =='EMnist' and self.ALPHA==1:
             self.train_len = [15784, 15629, 11810, 17649, 16154, 15673, 14891, 17210] #EMNIST alpha1
             self.test_len = [2200, 2600, 2600, 2400, 2500, 2300, 2600, 2600] #EMNIST alpha1
-            self.datasetPath = "EMnist-u8c27-alpha1-ratio1"
+            self.datasetPath = "EMnist-u8c27-alpha1.0-ratio1"
             self.CLASS_NUM = 27
 
             self.Results = "./emnist-alpha1-pgd-vaeReport.csv"

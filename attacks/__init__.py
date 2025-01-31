@@ -1,2 +1,2 @@
-from fgsm import *
-from pgd import *
+from .fgsm import *
+from .pgd import *
