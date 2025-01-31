@@ -11,7 +11,7 @@ def pgd_attack(model, criterion, images, labels, eps=0.3, alpha=0.00784313725490
 
     for i in range(iters) :
         images = images.clone().detach().requires_grad_(True)
-        outputs = model(images)
+        outputs = model(images, type="valid")
 
         model.zero_grad()
         cost = loss(outputs, labels).to(DEVICE)

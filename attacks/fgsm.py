@@ -8,7 +8,7 @@ def fgsm_attack(model, loss, images, labels, eps=0.3):
     labels = labels.to(DEVICE)
     images = images.clone().detach().requires_grad_(True)
 
-    outputs = model(images)
+    outputs = model(images, type="valid")
 
     model.zero_grad()
     cost = loss(outputs, labels).to(DEVICE)

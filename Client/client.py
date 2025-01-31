@@ -56,7 +56,7 @@ class Client():
             data = data.detach()
             z = Variable(FloatTensor(np.random.normal(0, 1, (int(self.BATCH_SIZE / self.config.replace_probs), self.config.latent_dim)))).to(self.device)
             # Get labels ranging from 0 to n_classes for n rows
-            labels = Variable(LongTensor(target.cpu())).to(self.device)
+            labels = Variable(LongTensor(target)).to(self.device)
 
 
             if data.shape[0] == self.BATCH_SIZE:
@@ -113,7 +113,7 @@ class Client():
     with torch.no_grad():
       for batch_idx, (data, target) in enumerate(self.test_loader):
         data, target = data.to(DEVICE), target.to(DEVICE)
-        output = local_model(data).to(DEVICE)
+        output = local_model(data, type="valid").to(DEVICE)
 
         #Computer loss
         c_loss = criterion(output, target).to(DEVICE)

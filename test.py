@@ -24,7 +24,7 @@ def test(model, dataloader, optimizer):
         for batch_idx, (data, target) in loop_val:
               data, target = data.to(DEVICE), target.to(DEVICE)
 
-              output = model(data).to(DEVICE)
+              output = model(data, type="valid").to(DEVICE)
 
               loss = criterion(output, target)
               test_loss += loss.item()

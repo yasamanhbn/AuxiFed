@@ -14,14 +14,15 @@ class CNN(nn.Module):
       self.fc2 = nn.Linear(16, config.CLASS_NUM)
       self.dropout = nn.Dropout(0.25)
 
-    def forward(self, input, original_data=[], labels=[], class_lens=[]):
+    def forward(self, input, original_data=[], labels=[], class_lens=[], type="train"):
         """
         Form the Feed Forward Network by combininig all the layers
         :param x: the input image for the network
         """
         x = input.clone()
-        original_data.requires_grad = True
-        for idx, i,  in enumerate(labels):
+        if type == 'train':
+          original_data.requires_grad = True
+          for idx, i,  in enumerate(labels):
             if class_lens[i] < 800:
                 x[idx] = original_data[idx]
 
