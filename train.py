@@ -72,7 +72,7 @@ def train(config):
         # print("Average Loss: " + str(val_loss / sum(config.test_len)))
         # print("-"*100)
         # print("Final Test in global moedel with test dataset")
-
+        print("-"*40 + "Test" + "-"*40)
         test_loss, accuracy, all_preds = test(copy.deepcopy(global_model), test_data, optimizer)
         all_val_loss.append(test_loss)
         all_val_acc.append(accuracy)

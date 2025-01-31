@@ -7,6 +7,7 @@ from utils import *
 from tqdm import tqdm
 from ACGAN import *
 from test import test
+from attacks import *
 
 class Client():
   def __init__(self, config, batch_size, device, train_loader, test_loader, class_dict, gan_epoch, class_num, id):
@@ -122,7 +123,7 @@ class Client():
         correct += calculate_acc(output, target).item()
 
 
-    print("Validation Accuracy for Client " +str(self.id + 1) + ": " + str(correct * 100/len(self.test_loader)))
-    print("Validation Loss for Client " +str(self.id + 1) + ": " + str(test_loss/len(self.test_loader)))
+    print(f"Validation Accuracy for Client {self.id + 1}: {round(correct * 100/len(self.test_loader), 2)}")
+    print(f"Validation Loss for Client {self.id + 1}: {round(test_loss/len(self.test_loader), 2)}")
 
     return test_loss/len(self.test_loader), correct/len(self.test_loader)

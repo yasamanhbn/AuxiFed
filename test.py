@@ -37,6 +37,6 @@ def test(model, dataloader, optimizer):
                 accuracy="{:.4f}".format(correct * 100/ batch_idx),
                 refresh=True,
               )
-    print("Final Test Total Acuracy:" + str(correct * 100/len(dataloader)))
-    print("Final Test  Total Loss:" + str(test_loss/len(dataloader)))
+    print(f"Final Test Total Acuracy: {round(correct * 100/len(dataloader), 2)}")
+    print(f"Final Test  Total Loss: {round(test_loss/len(dataloader), 2)}")
     return test_loss/len(dataloader), correct/len(dataloader), all_preds
