@@ -59,7 +59,7 @@ os
 
 ## Citation
 If you use this code, please cite our paper:
-> **Resilient Federated Adversarial Learning with AC-GANs and Probabilistic Synthesis**
+> **[Resilient Federated Adversarial Learning with AC-GANs and Probabilistic Synthesis](https://ieeexplore.ieee.org/document/11007173/)**
 
 ## License
 This project is licensed under the MIT License.
